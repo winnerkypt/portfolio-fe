@@ -7,4 +7,9 @@ describe("metadata", () => {
     expect(metadata.openGraph?.images).toEqual([{ url: profileImage.src, width: profileImage.width, height: profileImage.height }]);
     expect(metadata.twitter?.images).toEqual([profileImage.src]);
   });
+
+  it("resolves canonical and share URLs against the live production domain", () => {
+    expect(String(metadata.metadataBase)).toBe("https://kanyapat-w.vercel.app/");
+    expect(metadata.openGraph && "url" in metadata.openGraph ? String(metadata.openGraph.url) : "").toBe("https://kanyapat-w.vercel.app");
+  });
 });

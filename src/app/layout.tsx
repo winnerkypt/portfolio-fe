@@ -3,7 +3,7 @@ import "./globals.css";
 import { profileImage } from "@/core/data/profile-image";
 import { fontClassNames } from "@/core/libs/fonts";
 
-const siteUrl = "https://kanyapat-portfolio.vercel.app";
+const siteUrl = "https://kanyapat-w.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
