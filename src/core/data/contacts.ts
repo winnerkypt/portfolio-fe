@@ -1,28 +1,36 @@
-export interface ContactLink {
-  id: string;
-  label: string;
-  href: string;
-  icon: "phone" | "email" | "github" | "linkedin";
-}
+import type { ContactLine } from "./types/contact";
 
-export const contactLinks: ContactLink[] = [
-  { id: "phone", label: "090-595-3589", href: "tel:0905953589", icon: "phone" },
+export const contactLines: readonly ContactLine[] = [
   {
     id: "email",
-    label: "kanyapat.witta@gmail.com",
+    label: "Email",
+    text: "kanyapat.witta@gmail.com",
     href: "mailto:kanyapat.witta@gmail.com",
-    icon: "email",
+    external: false,
+    copyable: true,
+  },
+  {
+    id: "phone",
+    label: "Phone",
+    text: "090-595-3589",
+    href: "tel:0905953589",
+    external: false,
+    copyable: false,
   },
   {
     id: "github",
-    label: "winnerkypt",
+    label: "GitHub",
+    text: "winnerkypt",
     href: "https://github.com/winnerkypt",
-    icon: "github",
+    external: true,
+    copyable: false,
   },
   {
     id: "linkedin",
-    label: "Kanyapat Wittayamanitkul",
+    label: "LinkedIn",
+    text: "Kanyapat Wittayamanitkul",
     href: "https://www.linkedin.com/in/kanyapat-wittayamanitkul-5935011a0/",
-    icon: "linkedin",
+    external: true,
+    copyable: false,
   },
 ];

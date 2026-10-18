@@ -1,0 +1,314 @@
+.post-board {
+  position: relative;
+  padding: clamp(36px, 6vw, 84px) clamp(18px, 5vw, 72px);
+  border-radius: 40px;
+  background-color: var(--color-board);
+  box-shadow: var(--shadow-board);
+}
+
+.pb-grid {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.pb-grid-layer {
+  position: absolute;
+  inset: -48px 0;
+  background-image: var(--grid-lines);
+  background-size: 34px 34px;
+}
+
+.postcard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  max-width: 940px;
+  margin-inline: auto;
+  border-radius: 14px;
+  transform: rotate(-1.2deg);
+  background-color: var(--color-paper);
+  background-image: radial-gradient(rgb(var(--rgb-brown) / 0.07) 1px, transparent 1.4px);
+  background-size: 18px 18px;
+  box-shadow: 0 2px 0 rgb(255 255 255 / 0.6) inset, 0 34px 60px -18px rgb(0 0 0 / 0.55);
+}
+
+.pc-tape {
+  position: absolute;
+  z-index: 2;
+  width: 120px;
+  height: 32px;
+  box-shadow: 0 2px 4px rgb(var(--rgb-ink) / 0.2);
+  clip-path: var(--tape-clip);
+}
+
+.pc-tape.t1 {
+  top: -14px;
+  left: -26px;
+  transform: rotate(-32deg);
+  background: rgb(var(--rgb-pink) / 0.85);
+}
+
+.pc-tape.t2 {
+  bottom: -12px;
+  right: -24px;
+  transform: rotate(-28deg);
+  background: rgb(var(--rgb-sand) / 0.92);
+}
+
+.pc-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(28px, 4vw, 48px);
+  border-right: 2px dashed rgb(var(--rgb-brown) / 0.35);
+}
+
+.pc-label,
+.pc-k {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-moss);
+}
+
+.pc-label {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+}
+
+.pc-msg h2 {
+  font-family: var(--f-sign);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: clamp(3.6rem, 2rem + 5vw, 6.2rem);
+  line-height: 0.84;
+  color: var(--color-brown);
+}
+
+.pc-lede {
+  max-width: 32ch;
+  color: var(--color-muted);
+}
+
+.pc-sign {
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 10px;
+  font-family: var(--f-sign);
+  font-size: 1.6rem;
+  color: var(--color-pink);
+  transform: rotate(-4deg);
+}
+
+.pc-addr {
+  position: relative;
+  padding: clamp(28px, 4vw, 48px);
+  padding-top: clamp(150px, 15vw, 168px);
+}
+
+.stamp {
+  position: absolute;
+  top: 26px;
+  right: 28px;
+  width: 104px;
+  height: 124px;
+  transform: rotate(4deg);
+  background: radial-gradient(circle at center, transparent 4.5px, var(--color-pink) 5px) -7px -7px / 14px 14px;
+  filter: drop-shadow(0 3px 4px rgb(var(--rgb-ink) / 0.25));
+}
+
+.stamp-in {
+  position: absolute;
+  inset: 7px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  background: var(--color-pink);
+  box-shadow: inset 0 0 0 3px var(--color-paper), inset 0 0 0 4.5px rgb(var(--rgb-ink) / 0.35);
+}
+
+.stamp-in svg {
+  width: 40px;
+  height: 40px;
+}
+
+.stamp-in b {
+  font-family: var(--f-sign);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 0.9;
+  color: var(--color-ink);
+}
+
+.stamp-in small {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-ink);
+}
+
+.postmark {
+  position: absolute;
+  top: 58px;
+  right: 96px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  border: 3px solid rgb(var(--rgb-moss) / 0.7);
+  outline: 1.5px solid rgb(var(--rgb-moss) / 0.55);
+  outline-offset: -10px;
+  transform: rotate(-14deg);
+  color: rgb(var(--rgb-moss) / 0.85);
+  pointer-events: none;
+}
+
+.postmark span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.postmark b {
+  font-family: var(--f-sign);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.postmark::after {
+  content: "";
+  position: absolute;
+  left: 92%;
+  top: 36%;
+  width: 120px;
+  height: 28px;
+  background: repeating-linear-gradient(transparent 0 5px, rgb(var(--rgb-moss) / 0.6) 5px 7px);
+  -webkit-mask: linear-gradient(90deg, #000, transparent);
+  mask: linear-gradient(90deg, #000, transparent);
+}
+
+.pc-lines {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.pc-lines li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  min-width: 0;
+  padding: var(--space-3) 0 var(--space-2);
+  border-bottom: 1.5px dashed rgb(var(--rgb-brown) / 0.35);
+}
+
+.pc-k {
+  flex: none;
+  width: 100%;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+}
+
+.pc-lines a {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+  color: var(--color-ink);
+  transition: color 0.2s;
+}
+
+.pc-lines a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--color-pink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease);
+}
+
+.pc-lines a:hover {
+  color: var(--color-brown);
+}
+
+.pc-lines a:hover::after {
+  transform: none;
+}
+
+.pc-lines a i {
+  font-style: normal;
+  color: var(--color-brown);
+}
+
+.pc-copy {
+  appearance: none;
+  padding: var(--space-1) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s var(--ease);
+}
+
+.pc-copy:hover {
+  background: var(--color-brown);
+  transform: translateY(-1px);
+}
+
+.pb-star {
+  position: absolute;
+  left: clamp(10px, 4vw, 54px);
+  top: clamp(10px, 3vw, 34px);
+  width: 68px;
+  height: 68px;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.3));
+}
+
+@media (max-width: 760px) {
+  .postcard {
+    grid-template-columns: minmax(0, 1fr);
+    transform: none;
+  }
+
+  .pc-msg {
+    border-right: 0;
+    border-bottom: 2px dashed rgb(var(--rgb-brown) / 0.35);
+  }
+
+  .pc-addr {
+    padding-top: 150px;
+  }
+
+  .pb-star {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .pc-lines a {
+    display: flex;
+    align-items: center;
+    flex: 1 1 100%;
+    min-height: 44px;
+  }
+
+  .pc-copy {
+    min-height: 44px;
+    padding-inline: var(--space-4);
+  }
+}

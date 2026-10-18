@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { andika } from "@/core/libs/fonts";
+import { profileImage } from "@/core/data/profile-image";
+import { fontClassNames } from "@/core/libs/fonts";
 
 const siteUrl = "https://kanyapat-portfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Kanyapat Wittayamanitkul — Software Engineer",
+    default: "Kanyapat Wittayamanitkul — Full Stack Engineer",
     template: "%s · Kanyapat Wittayamanitkul",
   },
   description:
-    "Portfolio of Kanyapat Wittayamanitkul, a software engineer building CMS platforms, RESTful APIs, and production web applications.",
+    "Portfolio of Kanyapat Wittayamanitkul, a full stack engineer building web platforms end to end: Next.js front ends, Go and Laravel APIs, and CMS platforms.",
   keywords: [
+    "Full Stack Engineer",
     "Software Engineer",
-    "Backend Engineer",
     "Next.js",
     "Golang",
     "Laravel",
@@ -26,17 +27,17 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Kanyapat Wittayamanitkul",
-    title: "Kanyapat Wittayamanitkul — Software Engineer",
+    title: "Kanyapat Wittayamanitkul — Full Stack Engineer",
     description:
-      "Software engineer building CMS platforms, RESTful APIs, and production web applications.",
-    images: [{ url: "/images/profile.png", width: 2520, height: 2248 }],
+      "Full stack engineer building web platforms end to end: Next.js, Go, Laravel, and CMS platforms.",
+    images: [{ url: profileImage.src, width: profileImage.width, height: profileImage.height }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanyapat Wittayamanitkul — Software Engineer",
+    title: "Kanyapat Wittayamanitkul — Full Stack Engineer",
     description:
-      "Software engineer building CMS platforms, RESTful APIs, and production web applications.",
-    images: ["/images/profile.png"],
+      "Full stack engineer building web platforms end to end: Next.js, Go, Laravel, and CMS platforms.",
+    images: [profileImage.src],
   },
 };
 
@@ -46,8 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${andika.className} antialiased`}>{children}</body>
+    <html lang="en" className={fontClassNames}>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

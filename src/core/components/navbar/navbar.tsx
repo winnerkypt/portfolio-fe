@@ -1,28 +1,49 @@
-import Link from "next/link";
-import { NavMobile } from "./nav-mobile";
-import { NavDesk } from "./nav-desk";
-import { navItems } from "./nav-items";
+"use client";
 
-export const Navbar = () => {
+import "@/styles/nav.css";
+import { ArrowIcon } from "@/core/components/icons/icons";
+import { profile } from "@/core/data/profile";
+import { useScrollSpy } from "@/core/hooks/useScrollSpy";
+
+const links = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Work" },
+] as const;
+
+const spyIds = [...links.map((link) => link.id), "contact"];
+
+export function Navbar() {
+  const { current, scrolled, lock } = useScrollSpy(spyIds);
+  const linkProps = (id: string) => ({
+    href: `#${id}`,
+    "aria-current": current === id ? ("true" as const) : undefined,
+    onClick: () => lock(id),
+  });
+
   return (
-    <header className="fixed inset-x-0 top-0 z-[300] h-[70px] border-b border-ink/10 bg-cream/90 backdrop-blur-md">
-      <div className="container mx-auto flex h-full items-center justify-between">
-        <Link
-          href="#top"
-          className="text-nav font-bold transition-opacity duration-200 ease-out hover:opacity-70"
-        >
-          <span className="text-moss/50">&lt;</span>
-          <span className="text-brown">SoftwareEngineer</span>
-          <span className="text-green"> title</span>
-          <span className="text-ink/45">=&quot;</span>
-          <span className="text-pink">Portfolio</span>
-          <span className="text-ink/45">&quot;</span>
-          <span className="text-moss/50">/&gt;</span>
-        </Link>
-
-        <NavDesk navItems={navItems} />
-        <NavMobile navItems={navItems} />
+    <header className={scrolled ? "nav scrolled" : "nav"}>
+      <div className="wrap">
+        <div className="nav-inner">
+          <a className="logo" href="#top">
+            <i aria-hidden="true">K</i>
+            {profile.name}
+          </a>
+          <nav aria-label="Primary">
+            <ul>
+              {links.map((link) => (
+                <li key={link.id}>
+                  <a {...linkProps(link.id)}>{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <a className="btn btn-brand" {...linkProps("contact")}>
+            Get in touch
+            <ArrowIcon />
+          </a>
+        </div>
       </div>
     </header>
   );
-};
+}

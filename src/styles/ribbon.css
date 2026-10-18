@@ -1,0 +1,58 @@
+/* The tilted band is wider than the page on purpose; the wrapper clips the bleed so it never adds scroll width. */
+.ribbon-wrap {
+  position: relative;
+  z-index: 2;
+  overflow-x: clip;
+  padding-block: 3vw;
+  margin-bottom: calc(var(--sec) - 3vw);
+}
+
+.ribbon {
+  position: relative;
+  margin-inline: -3vw;
+  background: var(--color-brown);
+  color: var(--color-sand);
+  transform: rotate(-1.6deg) skewX(calc(var(--ribbon-skew, 0) * 1deg));
+  overflow: hidden;
+  box-shadow: var(--shadow-2);
+}
+
+.hero + .ribbon-wrap {
+  margin-top: calc(-4.4vw - 26px);
+}
+
+.ribbon-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  padding-block: var(--space-4);
+  font-family: var(--f-sign);
+  font-size: clamp(1.5rem, 1rem + 1.8vw, 2.5rem);
+  line-height: 1;
+}
+
+.ribbon-item {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding-right: 34px;
+}
+
+.ribbon-item svg {
+  width: 0.7em;
+  height: 0.7em;
+  flex: none;
+  color: var(--color-pink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ribbon-track {
+    animation: marquee 36s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,119 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.portrait-wrap {
+  position: relative;
+  max-width: 100%;
+}
+
+.portrait-circle {
+  position: absolute;
+  inset: -22px 30px 34px -26px;
+  background: var(--color-pink);
+  opacity: 0.9;
+  border-radius: 46% 54% 38% 62% / 52% 40% 60% 48%;
+}
+
+.portrait {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-3);
+  aspect-ratio: 4 / 4.6;
+  max-width: 100%;
+  transform: rotate(-2deg);
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 30%;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.about-text .sec-head {
+  margin-bottom: 0;
+}
+
+.big {
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.big span {
+  color: var(--color-muted);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-1), inset 0 0 0 1px var(--color-border);
+}
+
+.facts div {
+  background: var(--color-surface);
+  padding: 18px 20px;
+  min-width: 0;
+}
+
+.facts dt {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.facts dd {
+  margin-top: var(--space-1);
+  font-weight: 500;
+}
+
+@media (max-width: 899px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+    gap: clamp(24px, 4vw, 40px);
+    align-items: start;
+  }
+
+  .portrait-wrap {
+    margin: var(--space-4) 0 0 var(--space-4);
+  }
+}
+
+@media (max-width: 699px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portrait-wrap {
+    width: min(100% - var(--space-6), 320px);
+    margin: var(--space-4) auto 0;
+    translate: calc(var(--space-3) * -1) 0;
+  }
+
+  .portrait {
+    aspect-ratio: 4 / 4.3;
+    transform: rotate(-2.5deg);
+  }
+}
+
+@media (max-width: 359px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

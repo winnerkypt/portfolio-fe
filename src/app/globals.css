@@ -2,89 +2,281 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Colors are stored as raw RGB channels so Tailwind's `/opacity` modifiers
- * resolve (`rgb(var(--ink) / 0.75)`). Using `var(--ink): #22302c` directly
- * silently breaks every `text-ink/75`-style utility.
- */
 :root {
-  /* warm family */
-  --cream: 255 244 229;
-  --cream-deep: 246 225 192;
-  --sand: 255 221 171;
-  --brown: 138 72 45;
-  --pink: 240 130 130;
+  color-scheme: light;
 
-  /* earth counterweight — moss, not teal: the warm family has no blue in it */
-  --ink: 44 29 22;
-  --moss: 95 107 51;
-  --moss-soft: 236 233 213;
+  --color-cream: #fff4e5;
+  --color-cream-deep: #f6e1c0;
+  --color-sand: #ffddab;
+  --color-brown: #8a482d;
+  --color-brown-hover: #74391f;
+  --color-pink: #f08282;
+  --color-pink-hover: #f59a9a;
+  --color-pink-wash: #ffe9ea;
+  --color-pink-deep: #c95f5f;
+  --color-ink: #2c1d16;
+  --color-moss: #5f6b33;
+  --color-moss-soft: #ece9d5;
+  --color-paper: #fffaf2;
+  --color-board: #4a2a1d;
+  --color-leaf: #5fae6e;
 
-  --green: 92 118 58;
+  --color-bg: #fbf8f3;
+  --color-surface: #fff;
+  --color-surface-2: #f5efe6;
+  --color-muted: #7a6a60;
+  --color-faint: #a89a90;
+  --color-border: #ece4d9;
+  --color-tint: #f6ece4;
 
-  --focus: rgb(var(--moss));
+  --rgb-ink: 44 29 22;
+  --rgb-brown: 138 72 45;
+  --rgb-cream: 255 244 229;
+  --rgb-paper: 255 250 242;
+  --rgb-sand: 255 221 171;
+  --rgb-pink: 240 130 130;
+  --rgb-moss: 95 107 51;
+  --rgb-leaf: 95 174 110;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --sec: clamp(80px, 11vw, 128px);
+  --nav-h: 76px;
+  --wrap: 1112px;
+
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgb(var(--rgb-ink) / 0.05);
+  --shadow-2: 0 2.5px 5px rgb(var(--rgb-ink) / 0.04), 0 14px 28px rgb(var(--rgb-ink) / 0.07);
+  --shadow-3: 0 10px 20px rgb(var(--rgb-ink) / 0.06), 0 30px 60px rgb(var(--rgb-ink) / 0.12);
+  --shadow-board: 0 30px 60px -20px rgb(var(--rgb-ink) / 0.45);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font: var(--font-body), var(--font-thai), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-sign: var(--font-display), "Impact", sans-serif;
+  --t-h2: clamp(2rem, 1.45rem + 2vw, 3rem);
+
+  --grid-lines:
+    linear-gradient(rgb(var(--rgb-cream) / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-cream) / 0.07) 1px, transparent 1px);
+  --tape-clip: polygon(3% 0, 97% 4%, 100% 30%, 96% 55%, 100% 80%, 97% 100%, 2% 96%, 0 70%, 4% 45%, 0 18%);
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
-  /* fixed navbar is 70px — keep anchored sections clear of it */
-  scroll-padding-top: 86px;
+  scroll-padding-top: 116px;
 }
 
 body {
-  color: rgb(var(--ink));
-  background: rgb(var(--brown));
-  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(900px 520px at 85% -120px, rgb(var(--rgb-pink) / 0.16), transparent 70%),
+    radial-gradient(800px 500px at 0% 0%, rgb(var(--rgb-sand) / 0.35), transparent 70%),
+    var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-x: clip;
 }
 
-/* Alternating grounds so adjacent bands never merge into one flat wash. */
-.surface-paper {
-  background-color: rgb(var(--cream));
-  background-image:
-    radial-gradient(ellipse at 50% 0%, rgb(var(--moss) / 0.06), transparent 55%);
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/*
- * Kept near-flat on purpose: the hero's wave is filled with this exact base
- * color, so any strong gradient here would reappear as a seam under the wave.
- */
-.surface-warm {
-  background-color: rgb(var(--cream-deep));
-  background-image:
-    radial-gradient(ellipse at 50% 100%, rgb(var(--moss) / 0.05), transparent 60%);
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 500;
+  text-wrap: balance;
 }
 
-.surface-ink {
-  background-color: rgb(var(--ink));
-  background-image:
-    radial-gradient(circle at 80% 10%, rgb(var(--brown) / 0.42), transparent 48%),
-    radial-gradient(circle at 12% 88%, rgb(var(--moss) / 0.28), transparent 45%);
+p,
+dl,
+dd {
+  margin: 0;
 }
 
-:where(a, button, [tabindex]):focus-visible {
-  outline: 2px solid var(--focus);
+:focus-visible {
+  outline: 2px solid var(--color-brown);
   outline-offset: 3px;
-  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -64px;
+  z-index: 400;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    padding-inline: var(--space-6);
+  }
+}
+
+.sec {
+  padding-block: 0 var(--sec);
+}
+
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+  margin-bottom: var(--space-7);
+}
+
+.label {
+  font-size: 15px;
+  color: var(--color-muted);
+}
+
+h2 {
+  font-size: var(--t-h2);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+h2 mark {
+  position: relative;
+  isolation: isolate;
+  color: inherit;
+  padding: 0 0.06em;
+  background: none;
+}
+
+h2 mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(transparent 58%, rgb(var(--rgb-pink) / 0.42) 58% 92%, transparent 92%);
+  transform-origin: left center;
+}
+
+.sec-lede {
+  font-size: 17px;
+  color: var(--color-muted);
+  max-width: 50ch;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 48px;
+  padding: 0 24px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease), background-color 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn .arr {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.35s var(--ease);
+}
+
+.btn:hover .arr {
+  transform: translateX(4px);
+}
+
+.btn-brand {
+  background: var(--color-brown);
+  color: #fff;
+}
+
+.btn-brand:hover {
+  background: var(--color-brown-hover);
+}
+
+.btn-ghost {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.tape {
+  position: absolute;
+  z-index: 2;
+  top: -14px;
+  right: 20%;
+  width: 112px;
+  height: 30px;
+  background: rgb(var(--rgb-sand) / 0.9);
+  transform: rotate(6deg);
+  box-shadow: 0 1px 2px rgb(var(--rgb-ink) / 0.12);
+  clip-path: var(--tape-clip);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  .file-index {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 
-/* The projects rail scrolls horizontally; the native bar would cut the cards. */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

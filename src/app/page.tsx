@@ -1,30 +1,30 @@
+import { MotionReveal } from "@/core/components/motion-reveal/motion-reveal";
 import { Navbar } from "@/core/components/navbar/navbar";
-import { About } from "@/core/presentations/about";
-import { Footer } from "@/core/presentations/footer";
-import { Main } from "@/core/presentations/main";
-import { Projects } from "@/core/presentations/projects";
-import { Skill } from "@/core/presentations/skills";
+import { ScrollMotion } from "@/core/components/scroll-motion/scroll-motion";
+import { About } from "@/core/sections/about/about";
+import { Contact } from "@/core/sections/contact/contact";
+import { Hero } from "@/core/sections/hero/hero";
+import { Ribbon } from "@/core/sections/ribbon/ribbon";
+import { Skills } from "@/core/sections/skills/skills";
+import { Work } from "@/core/sections/work/work";
 
 export default function Home() {
   return (
     <>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[400] focus:rounded-card focus:bg-ink focus:px-4 focus:py-2 focus:text-cream"
-      >
+      <a href="#top" className="skip-link">
         Skip to content
       </a>
-
       <Navbar />
-
-      <main id="main" className="pt-[70px]">
-        <Main />
+      <MotionReveal />
+      <ScrollMotion />
+      <main id="top">
+        <Hero />
+        <Ribbon />
         <About />
-        <Skill />
-        <Projects />
+        <Skills />
+        <Work />
+        <Contact />
       </main>
-
-      <Footer />
     </>
   );
 }
